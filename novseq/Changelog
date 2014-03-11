@@ -1,0 +1,20 @@
+This log lists the most recent changes made to the NovelSeq codebase.
+Author: Can Kockan
+
+Changes from the previous version:
+*****************************************************
+
+---Changed Makefile, added -fr to rm, edited some rules, will possibly update the Makefile further
+---added <string.h> to repeathandler.hh for strcmp()
+---added the missing int parameter "result" to printf statement  to novseq.cpp
+---removed extra '%' character in parserQualWReadPrunWSatellite.cpp 
+---readClones function now checks the return value of fscanf() in calProbMinEditRead.cpp
+---readClones function now checks the return value of fscanf() in convertToInvLRProbMinEditDist.cpp
+---return value of fscanf checked in OEASetsProb.cpp at the main method
+---int posClusterFMin=3000000000; has been changed to int posClusterFMin=3000000000U to tell constant is unsigned in OEASetsProb.cpp;
+---int posClusterRMin=3000000000; has been changed to int posClusterRMin=3000000000U to tell constant is unsigned in OEASetsProb.cpp;
+---fscanf return values checked on setCoverProbWeighted.cpp
+---typedefs removed on setCoverProbWeighted.cpp, since they were unused and generated compiler errors anyway
+---there are still some warnings about char*'s in sam2novseq.cc, but it does not affect compilation, check them later
+
+******************************************************

@@ -1,0 +1,59 @@
+LDFLAGS= -static
+LIBS= -lz -lm
+CFLAGS= -g -O2
+CC= g++
+
+all: novseq sam2novelseq parserQualWReadPrunWSatellite unique sortString calProbMinEditRead
+	convertToInvLRProbMinEditDist OEASetsProb setCoverProbWeighted type1to2convertor
+
+novseq: novseq.cpp
+	$(CC) $(CFLAGS) -o novseq novseq.cpp
+
+parserQualWReadPrunWSatellite: parserQualWReadPrunWSatellite.cpp
+	$(CC) $(CFLAGS) -o parserQualWReadPrunWSatellite parserQualWReadPrunWSatellite.cpp
+
+unique: unique.cpp
+	$(CC) $(CFLAGS) -o unique unique.cpp
+
+sortString: sortString.c
+	$(CC) $(CFLAGS) -o sortString sortString.c
+
+calProbMinEditRead: calProbMinEditRead.cpp
+	$(CC) $(CFLAGS) -o calProbMinEditRead calProbMinEditRead.cpp
+
+convertToInvLRProbMinEditDist: convertToInvLRProbMinEditDist.cpp
+	$(CC) $(CFLAGS) -o convertToInvLRProbMinEditDist convertToInvLRProbMinEditDist.cpp
+
+OEASetsProb: OEASetsProb.cpp
+	$(CC) $(CFLAGS) -o OEASetsProb OEASetsProb.cpp
+
+setCoverProbWeighted: setCoverProbWeighted.cpp
+	$(CC) $(CFLAGS) -o setCoverProbWeighted setCoverProbWeighted.cpp
+
+type1to2convertor: type1to2convertor.cpp 
+	$(CC) $(CFLAGS) -o type1to2convertor type1to2convertor.cpp
+
+#sam2novelseq start
+sam2novelseq: samflag.o samalignment.o sam2novelseq.o optionalfield.o repeathandler.o
+	$(CC) $(CFLAGS) -o sam2novelseq samflag.o samalignment.o sam2novelseq.o optionalfield.o repeathandler.o
+
+samflag.o:	samflag.cc samflag.hh
+	$(CC) $(CFLAGS) -c samflag.cc 
+
+samalignment.o:	samalignment.cc samalignment.hh
+	$(CC) $(CFLAGS) -c samalignment.cc
+
+sam2novelseq.o: sam2novelseq.cc sam2novelseq.hh
+	$(CC) $(CFLAGS) -c sam2novelseq.cc
+
+repeatHandler.o: repeathandler.hh repeathandler.cc
+	$(CC) $(CFLAGS) -c repeathandler.cc
+
+optionalfield.o: optionalfield.hh optionalfield.cc
+	$(CC) $(CFLAGS) -c optionalfield.cc
+#sam2novelseq end
+
+clean : 		
+	rm novseq sam2novelseq parserQualWReadPrunWSatellite unique sortString calProbMinEditRead
+	convertToInvLRProbMinEditDist OEASetsProb setCoverProbWeighted type1to2convertor
+
